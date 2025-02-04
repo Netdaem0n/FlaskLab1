@@ -1,1 +1,28 @@
+name: Create Report
 
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  create_report:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up script
+        run: |
+           chmod +x runner_script.sh
+
+      - name: Run script
+        run: |
+          ./runner_script.sh
+
+      - name: Upload Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: report-artifact
+          path: ~/report.txt
