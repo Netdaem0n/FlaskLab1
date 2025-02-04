@@ -5,8 +5,18 @@
     <title>TEST SITE</title>
 </head>
 <body>
-<p>Костя ТОПЧИК</p>
+<div>
+    <ul>
+        <li><a href="{{ url_for("index") }}">Главная</a></li>
+        <li><a href="{{ url_for("about") }}">О сайте</a></li>
+        <li><a href="{{ url_for("test") }}">Тестовая</a></li>
+    </ul>
+</div>
 <p>VER:{{ ver }}</p>
 <p>IP:{{ data }}</p>
+
+{% block content %}
+{% endblock %}
+
 </body>
 </html>

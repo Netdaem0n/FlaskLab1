@@ -1,14 +1,25 @@
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, jsonify, render_template, request, url_for
 
 app = Flask(__name__)
 
 
 @app.route('/')
-def hello_world():
+def index():
     data = request.remote_addr
-    return render_template('base.html', **{'ver': '0.1',
+    return render_template('index.html', **{'ver': '0.1',
                                            'data': data})
 
+@app.route('/about')
+def about():
+    data = request.remote_addr
+    return render_template('about.html', **{'ver': '0.1',
+                                           'data': data})
+
+@app.route('/test')
+def test():
+    data = request.remote_addr
+    return render_template('test.html', **{'ver': '0.1',
+                                           'data': data})
 
 if __name__ == '__main__':
     app.run()
