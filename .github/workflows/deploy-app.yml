@@ -19,13 +19,13 @@ jobs:
         run: |
           whoami
           pwd
-          docker-compose --version
+          docker compose --version
           ls -l /var/run/docker.sock
 
       - name: Stop and remove old containers (if running)
         run: |
-          docker-compose down || true
+          docker compose down || true
 
       - name: Deploy application
         run: |
-          docker-compose up -d
+          docker compose up -d

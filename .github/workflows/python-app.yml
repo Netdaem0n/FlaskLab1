@@ -25,8 +25,3 @@ jobs:
         run: |
           ./runner_script.sh
 
-      - name: Upload Report
-        uses: actions/upload-artifact@v4
-        with:
-          name: report-artifact
-          path: ~/report.txt
