@@ -15,17 +15,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: test user
-        run: |
-          whoami
-          pwd
-          docker compose --version
-          ls -l /var/run/docker.sock
-
       - name: Stop and remove old containers (if running)
         run: |
           docker compose down || true
 
       - name: Deploy application
         run: |
-          docker compose up -d
+          docker compose up --build --no-cache -d

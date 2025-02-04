@@ -11,17 +11,10 @@ jobs:
     runs-on: self-hosted
     steps:
 
-      - name: Check current user
-        run: whoami
-
       - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Set up script
         run: |
            chmod +x runner_script.sh
-
-      - name: Run script
-        run: |
           ./runner_script.sh
-
