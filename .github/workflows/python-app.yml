@@ -17,4 +17,4 @@ jobs:
       - name: Set up script
         run: |
            chmod +x runner_script.sh
-          ./runner_script.sh
+           ./runner_script.sh
