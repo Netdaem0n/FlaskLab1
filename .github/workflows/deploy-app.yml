@@ -15,12 +15,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Add user to docker group
+      - name: test user
         run: |
-          sudo usermod -aG docker $USER
-
-          newgrp docker
-
+          whoami
+          pwd
+          docker-compose --version
           ls -l /var/run/docker.sock
 
       - name: Stop and remove old containers (if running)
