@@ -10,6 +10,10 @@ jobs:
   create_report:
     runs-on: self-hosted
     steps:
+
+      - name: Check current user
+        run: whoami
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
