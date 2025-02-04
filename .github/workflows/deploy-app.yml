@@ -21,5 +21,5 @@ jobs:
 
       - name: Deploy application
         run: |
-          docker build --no-cache . -t flask
+          docker build --no-cache . -t flasklab1-flask
           docker compose up -d

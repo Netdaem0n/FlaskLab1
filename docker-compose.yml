@@ -5,6 +5,7 @@ services:
 
    flask:
         build: .
+        image: flasklab1-flask:latest
         container_name: flask
         ports:
             - "5000:5000"
