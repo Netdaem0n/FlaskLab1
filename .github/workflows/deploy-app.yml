@@ -23,3 +23,7 @@ jobs:
         run: |
           docker build --no-cache -t flasklab1-flask .
           docker compose up -d
+
+      - name: Delete none images
+        run: |     
+          docker image prune -f
