@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, render_template, request, url_for
+import os
 
 app = Flask(__name__)
 ver = "0.3alfa"  # Определяем ver здесь!
