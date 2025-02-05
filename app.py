@@ -12,7 +12,7 @@ def index():
 @app.route('/about')
 def about():
     data = request.remote_addr
-    return render_template('about.html', **{'ver': '0.1',
+    return render_template('about.html', **{'ver': '0.2',
                                            'data': data})
 
 @app.route('/test')
