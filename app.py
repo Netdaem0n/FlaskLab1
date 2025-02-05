@@ -2,7 +2,7 @@ from flask import Flask, jsonify, render_template, request, url_for
 
 app = Flask(__name__)
 ver = "0.2alfa"  # Определяем ver здесь!
-app.config['APPLICATION_ROOT'] = '/lab1/'
+app.config['APPLICATION_ROOT'] = '/lab1'
 
 @app.route('/')
 def index():
