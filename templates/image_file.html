@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}IMAGE transformation{% endblock %}
+
+{% block content %}
+<div class="text_main">
+<p>Загрузите свое изображение для трансформации и преобразования.</p>
+</div>
+{% endblock %}
+
+{% block form %}
+    <div class="text_info" style="display: inline-block; width: 90%;">
+    <div class="text_info" style="display: inline-block;">
+        <p>Выберите изображение для загрузки:</p>
+    <form action="/image" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" id="file" accept="image/*">
+        <input type="submit" value="Загрузить">
+    </form>
+    </div>
+
+    {% if file_old %}
+        <div class="text_info" style="display: inline-block;">
+            <p>Ваше изображение:</p>
+            <img src="{{ file_old }}" alt="Old image" width="320" height="240">
+        </div>
+    {% endif %}
+    </div>
+    {% if info %}
+        <div class="text_info">
+            <div class="terminal-text">
+            Информация о вашем файле:
+            {{ info }}
+            user@computer:~$ <span class="terminal-cursor"></span>
+            </div>
+            <img src="{{ filename }}" alt="My image" width="640" height="480">
+        </div>
+    {% endif %}
+
+{% endblock %}
+

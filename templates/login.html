@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}LOGIN{% endblock %}
+
+{% block content %}
+    <div class="text_main">
+        <p>Привет, <b>{{name}}</b>!</p>
+        <p>Ты находишься на странице логина.</p>
+
+        {% if captcha == 'ok' %}
+            <p>Повторно вводить ничего не нужно, переходи к разделу изображение</p>
+        {% else %}
+
+        <p>Введи капчу, чтобы войти. Авторизация по капче действует час</p>
+    </div>
+
+    {% if error %}
+        <p class="error_login">{{error}}</p>
+    {% endif %}
+    <div class="text_main text_captcha">
+        <form action="/" method="post">
+            <p>
+                <img src="{{ url_for('static', filename=myfile) }}" alt="captcha">
+                <input type="text" name="numbers" placeholder="Каптча">
+                <button type="submit">Войти</button>
+            </p>
+        </form>
+    </div>
+
+    {% endif %}
+{% endblock %}

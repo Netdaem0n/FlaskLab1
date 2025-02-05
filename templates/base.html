@@ -2,21 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>TEST SITE</title>
+    <link rel="stylesheet" href="/static/css/main.css">
+    <title>{% block title %}Base Title{% endblock %}</title>
 </head>
 <body>
-<div>
-    <ul>
-        <li><a href="{{ url_for("index") }}">Главная</a></li>
-        <li><a href="{{ url_for("about") }}">О сайте</a></li>
-        <li><a href="{{ url_for("test") }}">Тестовая</a></li>
-    </ul>
-</div>
-<p>VER:{{ ver }}</p>
-<p>IP:{{ data }}</p>
-
-{% block content %}
-{% endblock %}
-
+    {% block menu %}
+        <div class="menu_main">
+    <a href="/">Home</a>
+    <a href="/image">Изображение</a>
+        </div>
+    {% endblock %}
+    {% block content %}{% endblock %}
+    {% block form %}{% endblock %}
+    {% block history_upload %}{% endblock %}
 </body>
 </html>

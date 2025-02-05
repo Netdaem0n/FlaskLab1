@@ -7,6 +7,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
+RUN mkdir -p static/images/captcha && chmod -R 755 static/images/captcha
+RUN mkdir -p static/images/user && chmod -R 755 static/images/user
+RUN mkdir -p static/images/userfiles && chmod -R 755 static/images/userfiles
 
 EXPOSE 5000
 
