@@ -1,8 +1,8 @@
 from flask import Flask, jsonify, render_template, request, url_for
 
 app = Flask(__name__)
-ver = "0.2alfa"  # Определяем ver здесь!
-app.config['APPLICATION_ROOT'] = '/lab1'
+ver = "0.3alfa"  # Определяем ver здесь!
+app.config['APPLICATION_ROOT'] = os.environ.get('APPLICATION_ROOT', '/lab1')
 
 @app.route('/')
 def index():
@@ -23,4 +23,4 @@ def test():
                                            'data': data})
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True, host='0.0.0.0')
