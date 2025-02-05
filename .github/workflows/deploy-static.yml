@@ -1,0 +1,17 @@
+name: Deploy static to nginx
+
+on:
+  workflow_run:
+    workflows: ["Create Report"]
+    types:
+      - completed
+
+jobs:
+  create_report:
+    runs-on: self-hosted
+    steps:
+
+      - name: move data to nginx folder
+        run: |
+          pwd
+          cp -r site_index/. /var/www/html/

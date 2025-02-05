@@ -2,7 +2,7 @@ name: Deploy APP
 
 on:
   workflow_run:
-    workflows: ["Create Report"]
+    workflows: ["Deploy static to nginx"]
     types:
       - completed
 
