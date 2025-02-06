@@ -7,14 +7,6 @@ import subprocess
 def file_image_numbers(n: int, size: tuple[int, int] =(100, 80),
                        flag: str ='file', filename: str ='output', img_dir: str = r'static images',
                        color: str ='black', removefile: bool =True) -> str | bool | None:
-    '''CAPTCHA sample:\n
-    n: size of numbers, ex: 5, max n=10\n
-    size: dimensions of image in tuple (100, 50) if it doesn't fit size, it will adjust\n
-    flag: file | bobj, send it like bite object or file\n
-    filename: name of file\n
-    img_dir: name of output directory - ex: static images\n
-    '''
-
 
     current_path = os.path.dirname(os.path.abspath(__file__))
 
