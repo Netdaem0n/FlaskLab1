@@ -12,7 +12,7 @@ app = Flask(__name__)
 
 redis = Redis(host='redis', port=6379)
 app.config['UPLOAD_FOLDER'] = r'static/images/userfiles'
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.ERROR)
 
 
 @app.route('/', methods=['GET', 'POST'])
