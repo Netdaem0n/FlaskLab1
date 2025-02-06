@@ -6,11 +6,11 @@ from flask import request, redirect, url_for, render_template, make_response
 from uuid import uuid4
 from redis import Redis
 from werkzeug.utils import secure_filename
-
+import img_func
 
 app = Flask(__name__)
 
-redis = Redis(host='redis', port=6379)
+redis = Redis(host='localhost', port=6379)
 app.config['UPLOAD_FOLDER'] = r'static/images/userfiles'
 logging.basicConfig(level=logging.DEBUG)
 
@@ -19,6 +19,7 @@ logging.basicConfig(level=logging.DEBUG)
 def main_page():
 
     if not request.cookies.get('name'):
+
         name = str(uuid4())
         # Log the name and path
         app.logger.debug(f"Generating captcha for: {name}")
@@ -34,6 +35,7 @@ def main_page():
 
         response = make_response(render_template('login.html', **{'name': name,
                                                                   'myfile': text_filename}))
+        response.delete_cookie('captcha')
         response.set_cookie('name', name, max_age=60 * 60 * 24)
         return response
 
@@ -92,7 +94,7 @@ def main_page():
 
 @app.route('/image', methods=['GET', 'POST'])
 def image():
-    if not request.cookies.get('captcha') or request.cookies.get('captcha') != 'ok':
+    if   request.cookies.get('captcha') != 'ok' or not request.cookies.get('name'):
         return redirect(url_for('main_page'))
     if request.method == 'POST':
         if 'file' not in request.files:
@@ -115,6 +117,37 @@ def image():
 
     return render_template('image_file.html')
 
+@app.route('/transform', methods=['GET', 'POST'])
+def transform():
+    context = dict()
+
+    if request.cookies.get("name") and request.cookies.get("filetype"):
+        file = f'{app.config["UPLOAD_FOLDER"]}/{request.cookies.get("name")}.{request.cookies.get("filetype")}'
+    else:
+        file = ""
+
+    if os.path.exists(file):
+        context['img_file'] = file
+        context['img_type'], context['img_size'], context['img_color'] = img_func.img_info(file)
+        file_graph = f'{app.config["UPLOAD_FOLDER"]}/{request.cookies.get("name")}_plot1.png'
+        img_func.plot_img_color(file, file_graph)
+        context['img_graph1'] = file_graph
+
+    if request.method == 'POST':
+        func_type = request.form.get('func')
+        period = int(request.form.get('period'))
+        direction = request.form.get('direction')
+        logging.debug(f"POST request received with func_type: {func_type, type(func_type)},"
+                      f" {period, type(period)}, {direction, type(direction)}")
+        context['post_data'] = ("Тип", func_type), ("Период" ,period), ("Направление" ,direction)
+        if os.path.exists(file):
+            file_transformed = img_func.transform_image(file, func_type, period, direction)
+            file_graph_new = f'{app.config["UPLOAD_FOLDER"]}/{request.cookies.get("name")}_plot2.png'
+            img_func.plot_img_color(file_transformed, file_graph_new)
+            context['post_data_file'] = (file_transformed, file_graph_new)
+
+    response = make_response(render_template("transform.html", **context))
+    return response
 
 @app.route('/error')
 @app.errorhandler(404)

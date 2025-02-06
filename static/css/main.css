@@ -139,3 +139,9 @@ body {
             from, to { opacity: 1; }
             50% { opacity: 0; }
         }
+
+.img_loader {
+    border: none;
+    border-radius: 25px;
+    align-items: center;
+}

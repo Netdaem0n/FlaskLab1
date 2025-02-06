@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}LOGIN{% endblock %}
+{% block title %}Вход в приложение{% endblock %}
 
 {% block content %}
     <div class="text_main">
@@ -9,23 +9,26 @@
 
         {% if captcha == 'ok' %}
             <p>Повторно вводить ничего не нужно, переходи к разделу изображение</p>
+
         {% else %}
+            <p>Введи капчу, чтобы загрузить изображение. Авторизация по капче действует час</p>
+            <p>Если изображение уже загружено - можно его изменить в разделе <a href="{{ url_for('transform') }}">Трансформация изображения</a></p>
 
-        <p>Введи капчу, чтобы войти. Авторизация по капче действует час</p>
-    </div>
+            </div>
 
-    {% if error %}
-        <p class="error_login">{{error}}</p>
-    {% endif %}
-    <div class="text_main text_captcha">
-        <form action="/" method="post">
-            <p>
-                <img src="{{ url_for('static', filename=myfile) }}" alt="captcha">
-                <input type="text" name="numbers" placeholder="Каптча">
-                <button type="submit">Войти</button>
-            </p>
-        </form>
-    </div>
+                {% if error %}
+                    <p class="error_login">{{error}}</p>
+                {% endif %}
 
-    {% endif %}
+            <div class="text_main text_captcha">
+                <form action="/" method="post">
+                    <p>
+                        <img src="{{ url_for('static', filename=myfile) }}" alt="captcha">
+                        <input type="text" name="numbers" placeholder="Каптча">
+                        <button type="submit">Войти</button>
+                    </p>
+                </form>
+            </div>
+
+        {% endif %}
 {% endblock %}

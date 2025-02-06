@@ -3,17 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/static/css/main.css">
-    <title>{% block title %}Base Title{% endblock %}</title>
+    {% block stylesheet %}
+    {% endblock %}
+    <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-    {% block menu %}
-        <div class="menu_main">
-    <a href="/">Home</a>
-    <a href="/image">Изображение</a>
-        </div>
+
+    <div class="menu_main">
+        <a href="{{ url_for('main_page') }}">Авторизация</a>
+        <a href="{{ url_for('image') }}">Загрузить и просмотреть изображение</a>
+        <a href="{{ url_for('transform') }}">Трансформация изображения</a>
+    </div>
+
+    {% block content %}
     {% endblock %}
-    {% block content %}{% endblock %}
-    {% block form %}{% endblock %}
-    {% block history_upload %}{% endblock %}
+
 </body>
 </html>

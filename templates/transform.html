@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="/static/css/transform.css">
+{% endblock %}
+{% block title %} Трансформация изображения {% endblock %}
+
+{% block content %}
+    <div class="text_info">
+        <p>Трансформация изображения по заданным параметрам.</p>
+        {% if img_file %}
+
+
+            <form style="margin: 10px; padding: 5px;" action="/transform" method="post">
+                <p style="display: inline;">Выберите параметры:</p>
+                <label for="func">Функция:</label>
+                <select id="func" name="func">
+                    <option value="sin">Sin</option>
+                    <option value="cos">Cos</option>
+                </select>
+                <label for="period">Период:</label>
+                <input type="number" id="period" name="period" value="1" min="1" max="10">
+                <label for="direction">Ось:</label>
+                <select id="direction" name="direction">
+                    <option value="horizontal">Горизонтальная</option>
+                    <option value="vertical">Вертикальная</option>
+                </select>
+                <button type="submit">Преобразовать</button>
+            </form>
+
+            {% if post_data %}
+                <div style="color: black; font-size: 1.2rem; display: inline;
+                border: none; background: #9c7557; margin: 8px; padding: 8px; border-radius: 20px;">
+                    {% for el in post_data %}
+                    <h4 style="display: inline;">{{ el[0] }} : {{ el[1] }}</h4>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <p>Ваше изображение: тип {{ img_type }} размер {{ img_size }} цветность {{ img_color }}</p>
+            <div class="img_analize_vid">
+                <img src="{{ img_file }}" alt="" height="400px" width="600px">
+                <img src="{{ img_graph1 }}" alt="" height="400px" width="600px">
+            </div>
+
+            {% if post_data_file %}
+            <p>Изображение после трансформации:</p>
+            <div>
+                <img src="{{ post_data_file[0] }}" alt="" height="400px" width="600px">
+                <img src="{{ post_data_file[1] }}" alt="" height="400px" width="600px">
+            </div>
+            {% endif %}
+
+        {% else %}
+            <p>Файла не существует, сначала загрузите его!</p>
+        {% endif %}
+    </div>
+{% endblock %}

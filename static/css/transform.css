@@ -1,0 +1,9 @@
+.img_analize_vid img {
+    border: 1px solid #f1f1f1;
+    border-radius: 15px;
+}
+
+.img_analize_vid img:hover {
+    border: 1px solid black;
+    border-radius: 15px;
+}
